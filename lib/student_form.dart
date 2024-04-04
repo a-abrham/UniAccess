@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 class StudentForm extends StatelessWidget {
-  final String name, department, id;
+  final String name, department, id, propic;
 
   const StudentForm(
       {super.key,
       required this.name,
       required this.department,
-      required this.id});
+      required this.id,
+      required this.propic});
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +18,9 @@ class StudentForm extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Center(
+            Center(
               child: CircleAvatar(
-                backgroundImage: AssetImage('asset/e.webp'),
+                backgroundImage: AssetImage(propic),
                 radius: 40,
               ),
             ),
