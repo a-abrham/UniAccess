@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {
-  final String university;
+  final String university, logo;
 
-  const Header({super.key, required this.university});
+  const Header({super.key, required this.university, required this.logo});
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +12,8 @@ class Header extends StatelessWidget {
       children: [
         Container(
           margin: const EdgeInsets.fromLTRB(15, 5, 0, 0),
-          child: const Image(
-            image: AssetImage('asset/bduLogo.jpg'),
+          child: Image(
+            image: AssetImage(logo),
             height: 60,
           ),
         ),
@@ -21,13 +21,13 @@ class Header extends StatelessWidget {
           margin: const EdgeInsets.fromLTRB(20, 20, 0, 0),
           child: RichText(
             text: TextSpan(
-              style: TextStyle(fontSize: 24, color: Colors.black),
+              style: const TextStyle(fontSize: 24, color: Colors.black),
               children: <TextSpan>[
                 TextSpan(
                   text: university,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
-                TextSpan(text: ' University'),
+                const TextSpan(text: ' University'),
               ],
             ),
           ),
