@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'student_page.dart';
@@ -6,7 +8,6 @@ class Login extends StatefulWidget {
   const Login({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _LoginState createState() => _LoginState();
 }
 
@@ -38,7 +39,6 @@ class _LoginState extends State<Login> {
         debugPrint('Success');
         debugPrint(response.body);
         Navigator.push(
-          // ignore: use_build_context_synchronously
           context,
           MaterialPageRoute(
               builder: (context) =>
@@ -46,9 +46,23 @@ class _LoginState extends State<Login> {
         );
       } else {
         debugPrint('Failed');
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Login failed. Please check your credentials.'),
+            backgroundColor: Colors.red,
+            duration: Duration(seconds: 3),
+          ),
+        );
       }
     } catch (e) {
       debugPrint('Error: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please check your connection.'),
+          backgroundColor: Colors.red,
+          duration: Duration(seconds: 3),
+        ),
+      );
     }
   }
 
