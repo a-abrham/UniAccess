@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:uniaccess/bar_code.dart';
 import 'package:uniaccess/editpage.dart';
 import 'package:uniaccess/header.dart';
+import 'package:uniaccess/login.dart';
 import 'package:uniaccess/registered.dart';
 import 'package:uniaccess/renewal.dart';
 import 'package:uniaccess/student_form.dart';
@@ -63,6 +64,15 @@ class StudentPage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const Registered()),
+                  );
+                },
+              ),
+              ListTile(
+                title: const Text('Log Out'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Login()),
                   );
                 },
               ),
