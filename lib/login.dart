@@ -22,47 +22,53 @@ class _LoginState extends State<Login> {
     final password = passwordController.text;
 
     if (universityId.isEmpty || yourId.isEmpty || password.isEmpty) {
-      return;
-    }
-
-    try {
-      final response = await http.post(
-        Uri.parse('http://10.0.2.2:3005/login'),
-        body: {
-          'universityId': universityId,
-          'yourId': yourId,
-          'password': password,
-        },
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Make sure you filled the provided fields!'),
+          backgroundColor: Colors.red,
+          duration: Duration(seconds: 3),
+        ),
       );
-
-      if (response.statusCode == 200) {
-        debugPrint('Success');
-        debugPrint(response.body);
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  StudentPage(student_details: response.body)),
+    } else {
+      try {
+        final response = await http.post(
+          Uri.parse('http://10.0.2.2:3005/login'),
+          body: {
+            'universityId': universityId,
+            'yourId': yourId,
+            'password': password,
+          },
         );
-      } else {
-        debugPrint('Failed');
+
+        if (response.statusCode == 200) {
+          debugPrint('Success');
+          debugPrint(response.body);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    StudentPage(student_details: response.body)),
+          );
+        } else {
+          debugPrint('Failed');
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Login failed. Please check your credentials.'),
+              backgroundColor: Colors.red,
+              duration: Duration(seconds: 3),
+            ),
+          );
+        }
+      } catch (e) {
+        debugPrint('Error: $e');
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Login failed. Please check your credentials.'),
+            content: Text('Please check your connection.'),
             backgroundColor: Colors.red,
             duration: Duration(seconds: 3),
           ),
         );
       }
-    } catch (e) {
-      debugPrint('Error: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please check your connection.'),
-          backgroundColor: Colors.red,
-          duration: Duration(seconds: 3),
-        ),
-      );
     }
   }
 
