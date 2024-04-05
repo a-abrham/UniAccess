@@ -79,17 +79,16 @@ class _LoginState extends State<Login> {
         padding: const EdgeInsets.all(18.0),
         child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                margin: const EdgeInsets.fromLTRB(0, 150, 0, 0),
+                margin: const EdgeInsets.fromLTRB(0, 200, 0, 0),
                 child: const Text(
                   'Login to UNIAccess',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                 ),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 35),
               TextField(
                 controller: universityIdController,
                 decoration: InputDecoration(
@@ -138,7 +137,7 @@ class _LoginState extends State<Login> {
                 ),
               ),
               const SizedBox(height: 20),
-              ElevatedButton(
+              OutlinedButton(
                 onPressed: _login,
                 child: const Text('Log In'),
               )

@@ -15,6 +15,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
   late TextEditingController _nameController;
   late TextEditingController _departmentController;
   late TextEditingController _idController;
+  bool _isChecked = false;
+  String _radioValue = 'Male';
 
   @override
   void initState() {
@@ -58,6 +60,44 @@ class _EditProfilePageState extends State<EditProfilePage> {
               decoration: const InputDecoration(labelText: 'ID'),
             ),
             const SizedBox(height: 20),
+            Row(
+              children: [
+                const Text('Still learning?'),
+                Checkbox(
+                  value: _isChecked,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      _isChecked = value ?? false;
+                    });
+                  },
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Radio<String>(
+                  value: 'Male',
+                  groupValue: _radioValue,
+                  onChanged: (String? value) {
+                    setState(() {
+                      _radioValue = value ?? '';
+                    });
+                  },
+                ),
+                const Text('Male'),
+                Radio<String>(
+                  value: 'Female',
+                  groupValue: _radioValue,
+                  onChanged: (String? value) {
+                    setState(() {
+                      _radioValue = value ?? '';
+                    });
+                  },
+                ),
+                const Text('Female')
+              ],
+            ),
+            const SizedBox(height: 30),
             ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
