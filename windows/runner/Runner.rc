@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "uniaccess" "\0"
+            VALUE "FileDescription", "flutterxfirebase" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "uniaccess" "\0"
+            VALUE "InternalName", "flutterxfirebase" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "uniaccess.exe" "\0"
-            VALUE "ProductName", "uniaccess" "\0"
+            VALUE "OriginalFilename", "flutterxfirebase.exe" "\0"
+            VALUE "ProductName", "flutterxfirebase" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

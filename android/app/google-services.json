@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "410326900971",
+    "project_id": "uniaccess-real",
+    "storage_bucket": "uniaccess-real.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:410326900971:android:65fdbba1ec39fd92929eae",
+        "android_client_info": {
+          "package_name": "com.example.flutterxfirebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3_8NGaYcj2Zrtt_hvNerv4lp_8eHwQ5U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,31 +1,23 @@
 import 'package:flutter/material.dart';
-import 'login.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutterxfirebase/firebase_options.dart';
+import 'package:flutterxfirebase/auth/main_page.dart';
 
-void main() {
-  runApp(const App());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-//   const String userdetails = '''
-//    {
-//      "name": "Kebedech Zeleke",
-//      "department": "Software Engineering",
-//      "id": "1311576",
-//      "email": "kebedech@gmail.com",
-//      "university": "Bahir Dar",
-//      "propic": "asset/e.webp",
-//      "logo": "asset/bduLogo.jpg"
-//    }
-// ''';
-
-  // runApp(const StudentPage(student_details: userdetails));
+  runApp(const MyApp());
 }
 
-class App extends StatelessWidget {
-  const App({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: Login(),
+      debugShowCheckedModeBanner: false,
+      home: Main(),
     );
   }
 }
