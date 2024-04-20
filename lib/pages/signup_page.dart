@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -15,18 +16,24 @@ class _SignUpState extends State<SignUp> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
 
   Future<void> _signup() async {
-    debugPrint('hello');
-
     final String email = _emailController.text.trim();
     final String password = _passwordController.text.trim();
     final String confirmPassword = _confirmPasswordController.text.trim();
+    final String firstName = _firstNameController.text.trim();
+    final String lastName = _lastNameController.text.trim();
 
-    if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
+    if (email.isEmpty ||
+        password.isEmpty ||
+        confirmPassword.isEmpty ||
+        firstName.isEmpty ||
+        lastName.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Please fill in all fields.'),
+          content: Text('Please fill in all the fields.'),
           backgroundColor: Colors.red,
           duration: Duration(seconds: 3),
         ),
@@ -56,6 +63,9 @@ class _SignUpState extends State<SignUp> {
         _emailController.clear();
         _passwordController.clear();
         _confirmPasswordController.clear();
+
+        // add user
+        await addUserDetails(firstName, lastName, email);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -79,7 +89,6 @@ class _SignUpState extends State<SignUp> {
             errorMessage = 'Error: ${error.message}';
         }
       }
-
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(errorMessage),
@@ -90,11 +99,26 @@ class _SignUpState extends State<SignUp> {
     }
   }
 
+  Future addUserDetails(String firstName, String lastName, String email) async {
+    try {
+      await FirebaseFirestore.instance.collection('users').add({
+        'first name': firstName,
+        'last name': lastName,
+        'email': email,
+      });
+      debugPrint('User details added successfully');
+    } catch (e) {
+      debugPrint('user not added $e');
+    }
+  }
+
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
+    _firstNameController.dispose();
+    _lastNameController.dispose();
     super.dispose();
   }
 
@@ -119,6 +143,38 @@ class _SignUpState extends State<SignUp> {
                     style: TextStyle(fontSize: 20),
                   ),
                   const SizedBox(height: 25),
+                  TextField(
+                    controller: _firstNameController,
+                    decoration: InputDecoration(
+                      labelText: 'First Name',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      hintText: 'Enter your first name',
+                      hintStyle: TextStyle(color: Colors.grey[400]),
+                      prefixIcon:
+                          Icon(Icons.email_outlined, color: Colors.grey[600]),
+                      filled: true,
+                      fillColor: Colors.grey[200],
+                    ),
+                  ),
+                  const SizedBox(height: 15),
+                  TextField(
+                    controller: _lastNameController,
+                    decoration: InputDecoration(
+                      labelText: 'Last Name',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      hintText: 'Enter your last name',
+                      hintStyle: TextStyle(color: Colors.grey[400]),
+                      prefixIcon:
+                          Icon(Icons.email_outlined, color: Colors.grey[600]),
+                      filled: true,
+                      fillColor: Colors.grey[200],
+                    ),
+                  ),
+                  const SizedBox(height: 15),
                   TextField(
                     controller: _emailController,
                     decoration: InputDecoration(
